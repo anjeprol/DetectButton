@@ -28,36 +28,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Log.d(TAG,"OnCreate");
         setContentView(R.layout.activity_main);
 
         tv_message = (TextView) findViewById(R.id.tv_meesage);
-        //ShakeDetector initialization
-        sensorManager       = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        shakeDetector = new ShakeDetector();
-        shakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
-            @Override
-            public void onShake(int count) {
-                Log.d(TAG,"Sacudido:"+count);
-                if(count == 2) {
-                    sendUIMessage("Encendido");
-                    startService(new Intent(getBaseContext(), Service.class));
-                }
-            }
-        });
-    }
 
-    @Override
-    protected void onPause() {
-        sensorManager.unregisterListener(shakeDetector);
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        sensorManager.registerListener(shakeDetector,sensorAccelerometer,SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
