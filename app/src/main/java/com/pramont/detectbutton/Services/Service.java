@@ -31,8 +31,8 @@ public class Service extends android.app.Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(),"Running in background "+count,Toast.LENGTH_LONG).show();
-        for (int i = 1 ; i < 500000 ; i++)
+        Toast.makeText(getApplicationContext(), "Running in background " + count, Toast.LENGTH_LONG).show();
+        for (int i = 1; i < 500000; i++)
         {
             count++;
         }
@@ -40,8 +40,9 @@ public class Service extends android.app.Service {
         shakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake(int count) {
-                Log.d(TAG,"Sacudido:"+count);
-                if(count == 2) {
+                Log.d(TAG, "Sacudido:" + count);
+                if (count == 2)
+                {
                     startService(new Intent(getBaseContext(), Service.class));
                     vibrator = (Vibrator) getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
                     // Vibrate for 500 milliseconds
@@ -54,7 +55,7 @@ public class Service extends android.app.Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(getApplicationContext(),"Stopping in background "+count,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Stopping in background " + count, Toast.LENGTH_LONG).show();
         sensorManager.unregisterListener(shakeDetector);
         super.onDestroy();
     }
@@ -63,9 +64,9 @@ public class Service extends android.app.Service {
     public void onCreate() {
         super.onCreate();
         //ShakeDetector initialization
-        sensorManager       = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         shakeDetector = new ShakeDetector();
-        sensorManager.registerListener(shakeDetector,sensorAccelerometer, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(shakeDetector, sensorAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 }
