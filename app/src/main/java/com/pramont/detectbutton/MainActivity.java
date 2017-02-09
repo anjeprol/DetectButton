@@ -1,6 +1,7 @@
 package com.pramont.detectbutton;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Vibrator;
@@ -9,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.pramont.detectbutton.Events.ShakeDetector;
+import com.pramont.detectbutton.Services.Service;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG,"Sacudido:"+count);
                 if(count == 2) {
                     sendUIMessage("Encendido");
+                    startService(new Intent(getBaseContext(), Service.class));
                 }
             }
         });
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     timesDown=0;
                     sendUIMessage("Encendido");
+                    startService(new Intent(getBaseContext(),Service.class));
                 }
                 break;
             case KeyEvent.KEYCODE_VOLUME_UP:
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     timesUp=0;
                     sendUIMessage("Apagado");
+                    stopService(new Intent(getBaseContext(),Service.class));
                 }
                 break;
         }

@@ -1,4 +1,4 @@
-package com.pramont.detectbutton;
+package com.pramont.detectbutton.Events;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
