@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
@@ -41,13 +42,16 @@ public class Service extends android.app.Service {
             @Override
             public void onShake(int count) {
                 Log.d(TAG, "Sacudido:" + count);
+                long[] ms = { 0, 250, 500, 250, 500, 250, 500, 250, 500, 250, 500};
+
                 if (count == 2)
                 {
                     startService(new Intent(getBaseContext(), Service.class));
                     vibrator = (Vibrator) getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
-                    vibrator.vibrate(500);
+                    // Vibrate
+                    vibrator.vibrate(ms,-1);
                 }
+
             }
         });
         return START_STICKY;
