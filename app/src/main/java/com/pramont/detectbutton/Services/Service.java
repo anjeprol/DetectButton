@@ -42,7 +42,7 @@ public class Service extends android.app.Service {
             @Override
             public void onShake(int count) {
                 Log.d(TAG, "Sacudido:" + count);
-                long[] ms = { 0, 250, 500, 250, 500, 250, 500, 250, 500, 250, 500};
+                long[] ms = { 0, 250, 500, 250, 500, 250, 500};
 
                 if (count == 2)
                 {
